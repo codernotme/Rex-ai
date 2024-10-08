@@ -51,32 +51,41 @@
 ## Directory Structure
 
 ```bash
-rex-ai-assistant/
-├── backend/               # Python Backend
+rex-ai/
+├── backend/                    # Python Backend
 │   ├── app/
-│   │   ├── api/           # API Routes
-│   │   ├── models/        # Database Models
-│   │   ├── services/      # External Services (Gemini API, NLP)
-│   │   ├── utils/         # Utility Functions
-│   │   ├── config.py      # Configuration settings
-│   │   ├── database.py    # DB connection setup
-│   │   └── main.py        # Backend entry point
-│   ├── tests/             # Backend tests
-│   └── requirements.txt   # Python dependencies
-├── frontend/              # Next.js Frontend
-│   ├── src/
-│   │   ├── components/    # UI components
-│   │   ├── pages/         # Next.js Pages
-│   │   ├── api/           # Frontend API services
-│   │   ├── styles/        # CSS Modules
-│   │   └── hooks/         # Custom React hooks
-│   ├── tests/             # Frontend tests
-│   ├── next.config.js     # Next.js config
-│   ├── tsconfig.json      # TypeScript config
-│   └── package.json       # Project dependencies
-├── .gitignore             # Ignored files for git
-├── README.md              # Project documentation
-└── Dockerfile             # Docker setup
+│   │   ├── api/                # API Routes
+│   │   ├── models/             # Database Models
+│   │   ├── services/           # External Services (Gemini API, NLP)
+│   │   ├── utils/              # Utility Functions
+│   │   ├── config.py           # Configuration settings
+│   │   ├── database.py         # DB connection setup
+│   │   └── main.py             # Backend entry point
+│   ├── tests/                  # Backend tests
+│   └── requirements.txt        # Python dependencies
+├── frontend/                   # Next.js Frontend (with App Directory)
+│   ├── app/                    # Main Next.js app directory
+│   │   ├── api/                # Frontend API routes (e.g. for task management)
+│   │   ├── dashboard/          # Dashboard route for personal assistant features
+│   │   ├── todos/              # To-do management route
+│   │   ├── calendar/           # Calendar and alarm route
+│   │   ├── settings/           # User settings route
+│   │   ├── layout.tsx          # App-wide layout
+│   │   ├── page.tsx            # Main app entry point
+│   │   ├── globals.css         # Global CSS styles
+│   │   └── head.tsx            # Metadata for the app (title, meta tags, etc.)
+│   ├── components/             # UI Components (Navbar, Footer, etc.)
+│   ├── styles/                 # CSS Modules and additional global styles
+│   ├── tests/                  # Frontend tests
+│   ├── next.config.js          # Next.js config
+│   ├── tsconfig.json           # TypeScript config
+│   └── package.json            # Project dependencies
+├── .gitignore                  # Git ignored files
+├── README.md                   # Project documentation
+├── Dockerfile                  # Docker setup
+├── docker-compose.yml          # Docker Compose for managing multiple services
+└── LICENSE                     # License file
+
 ```
 
 ## Getting Started
