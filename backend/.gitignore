@@ -1,0 +1,35 @@
+# Creating a .gitignore file for the backend
+
+gitignore_content = """
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+
+# Virtual environments
+venv/
+env/
+.venv/
+
+# Byte-compiled / optimized / DLL files
+*.pyc
+*.pyo
+*.pyd
+
+# Logs
+*.log
+
+# Docker
+docker-compose.yml
+Dockerfile
+
+# Environment variables
+.env
+"""
+
+# Saving the .gitignore file in the backend directory
+with open(os.path.join(backend_dir, ".gitignore"), "w") as file:
+    file.write(gitignore_content)
+
+backend_dir
