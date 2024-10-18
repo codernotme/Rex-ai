@@ -9,7 +9,7 @@ export default function Home() {
           <h1 className="text-6xl font-bold">Rex-AI</h1>
           <p className="text-3xl">Personal Assistant</p>
         </div>
-        <Card className="w-96 h-auto p-8 mx-auto justify-between bg-secondary-foreground">
+        <Card className="w-96 h-auto p-8 mx-auto justify-between bg-default-100">
           <CardHeader>
             <p className="text-3xl">Coming Soon</p>
           </CardHeader>
