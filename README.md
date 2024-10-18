@@ -216,7 +216,43 @@ Thanks to all the amazing contributors who helped in the development of Rex!
         <sub><b>Aryan Bajpai</b></sub>
       </a>
       <br />
-      Project Lead
+      Backend Dev
+    </td>
+    <td align="center">
+      <a href="https://github.com/CodeShreyashh">
+        <img src="https://avatars.githubusercontent.com/CodeShreyashh" width="100px;" alt="Shreyash"/>
+        <br />
+        <sub><b>Shreyash Awasthi</b></sub>
+      </a>
+      <br />
+      Frontend Dev
+    </td>
+    <td align="center">
+      <a href="https://github.com/anshhhh7">
+        <img src="https://avatars.githubusercontent.com/anshhhh7" width="100px;" alt="Ansh Nigam"/>
+        <br />
+        <sub><b>Ansh Nigam</b></sub>
+      </a>
+      <br />
+      Frontend Dev
+    </td>
+    <td align="center">
+      <a href="https://github.com/shrishtim998">
+        <img src="https://avatars.githubusercontent.com/shrishtim998" width="100px;" alt="Shrishti Mishra"/>
+        <br />
+        <sub><b>Shrishti Mishra</b></sub>
+      </a>
+      <br />
+      UI/UX
+    </td>
+    <td align="center">
+      <a href="https://github.com/Smriti1511s">
+        <img src="https://avatars.githubusercontent.com/Smriti1511s" width="100px;" alt="Smriti Singh"/>
+        <br />
+        <sub><b>Smriti Singh</b></sub>
+      </a>
+      <br />
+      UI/UX
     </td>
     <!-- Add more contributors in the same format -->
   </tr>
