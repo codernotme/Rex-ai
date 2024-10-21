@@ -10,7 +10,13 @@ import {
   Settings2,
   SquareTerminal
 } from "lucide-react";
-
+import {
+  SidebarGroup,
+  SidebarMenu,
+  SidebarMenuButton,
+  SidebarMenuItem
+} from "./ui/sidebar";
+import { Collapsible, CollapsibleTrigger } from "./ui/collapsible";
 import { NavMain } from "@/components/nav-main";
 import { NavProjects } from "@/components/nav-projects";
 import { NavUser } from "@/components/nav-user";
@@ -86,16 +92,32 @@ export function AppSidebar(props: React.ComponentProps<typeof Sidebar>) {
   return (
     <Sidebar collapsible="icon" {...props}>
       <SidebarHeader>
-        <div className="flex flex-row p-4 gap-2 items-center justify-between">
-          <h1 className="text-2xl font-bold">Rex-Ai</h1>
-          <ThemeButton />
-        </div>{" "}
+      <SidebarGroup>
+      <SidebarMenu>
+        <SidebarMenuItem>
+          <Collapsible asChild>
+            <SidebarMenuItem>
+              <CollapsibleTrigger asChild>
+                <SidebarMenuButton tooltip="Rex-ai">
+                  <div className="flex">
+                    <h1 className="text-2xl font-bold">Rex-Ai</h1>
+                  </div>
+                </SidebarMenuButton>
+              </CollapsibleTrigger>
+            </SidebarMenuItem>
+          </Collapsible>
+        </SidebarMenuItem>
+      </SidebarMenu>
+    </SidebarGroup>
       </SidebarHeader>
       <SidebarContent>
         <NavMain items={data.navMain} />
         <NavProjects projects={data.projects} />
       </SidebarContent>
       <SidebarFooter>
+        <div className="theme justify-center mx-auto">
+          <ThemeButton />
+        </div>
         <NavUser user={data.user} />
       </SidebarFooter>
       <SidebarRail />
