@@ -203,7 +203,7 @@ rex-ai/
 
 Contributions are welcome! Please fork the repository and create a pull request with your changes.
 
-## Contributors
+<!---
 
 Thanks to all the amazing contributors who helped in the development of Rex!
 
@@ -216,7 +216,7 @@ Thanks to all the amazing contributors who helped in the development of Rex!
         <sub><b>Aryan Bajpai</b></sub>
       </a>
       <br />
-      Backend Dev
+      Prod Lead
     </td>
     <td align="center">
       <a href="https://github.com/CodeShreyashh">
@@ -225,7 +225,7 @@ Thanks to all the amazing contributors who helped in the development of Rex!
         <sub><b>Shreyash Awasthi</b></sub>
       </a>
       <br />
-      Frontend Dev
+      Contributor
     </td>
     <td align="center">
       <a href="https://github.com/anshhhh7">
