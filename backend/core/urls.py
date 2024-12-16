@@ -14,9 +14,10 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
-from django.contrib import admin
 from django.urls import path
+from .views import TodoAPIView, GeminiAPIView
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
+    path('todos/', TodoAPIView.as_view(), name='todo_api'),
+    path('gemini/', GeminiAPIView.as_view(), name='gemini_api'),
 ]
