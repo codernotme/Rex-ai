@@ -2,9 +2,11 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
 from django.contrib.auth import authenticate, get_user_model
-import jwt as pyjwt
+from rest_framework_simplejwt.tokens import RefreshToken  # Add this import
 from django.conf import settings
 from rest_framework.renderers import JSONRenderer
+from rest_framework.permissions import IsAuthenticated
+from .user import UserDetailsView
 
 User = get_user_model()
 
@@ -39,8 +41,12 @@ class SignupView(APIView):
             return Response({"message": "Email is already taken"}, status=status.HTTP_400_BAD_REQUEST)
 
         user = User.objects.create_user(username=username, email=email, password=password)
-        token = pyjwt.encode({"id": user.id, "email": user.email}, settings.SECRET_KEY, algorithm="HS256")
-        return Response({"token": token, "message": "User created successfully"}, status=status.HTTP_201_CREATED)
+        refresh = RefreshToken.for_user(user)
+        return Response({
+            'refresh': str(refresh),
+            'access': str(refresh.access_token),
+            "message": "User created successfully"
+        }, status=status.HTTP_201_CREATED)
 
 class LoginView(APIView):
     renderer_classes = [JSONRenderer]
@@ -56,5 +62,9 @@ class LoginView(APIView):
         if user is None or not user.is_active:
             return Response({"message": "Invalid credentials"}, status=status.HTTP_401_UNAUTHORIZED)
 
-        token = pyjwt.encode({"id": user.id, "email": user.email}, settings.SECRET_KEY, algorithm="HS256")
-        return Response({"token": token, "message": "Logged in successfully"}, status=status.HTTP_200_OK)
+        refresh = RefreshToken.for_user(user)
+        return Response({
+            'refresh': str(refresh),
+            'access': str(refresh.access_token),
+            "message": "Logged in successfully"
+        }, status=status.HTTP_200_OK)
