@@ -17,6 +17,11 @@ import ThemeToggle from './theme-button'
 export function Navbar() {
   const { toggleSidebar } = useSidebar()
 
+  const handleSignOut = () => {
+    localStorage.removeItem("token");
+    window.location.reload();
+  }
+
   return (
     <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
       <div className="container flex h-14 items-center">
@@ -47,7 +52,7 @@ export function Navbar() {
                 <DropdownMenuItem>
                   <Link href="/settings">Settings</Link>
                 </DropdownMenuItem>
-                <DropdownMenuItem>Sign out</DropdownMenuItem>
+                <DropdownMenuItem onClick={handleSignOut}>Sign out</DropdownMenuItem>
               </DropdownMenuContent>
             </DropdownMenu>
           </nav>

@@ -1,6 +1,12 @@
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
-import { Overview } from "@/components/overview"
-import { RecentTodos } from "@/components/recent-todos"
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import { Overview } from "@/components/overview";
+import { RecentTodos } from "@/components/recent-todos";
 
 export default function Dashboard() {
   return (
@@ -9,9 +15,7 @@ export default function Dashboard() {
       <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
         <Card>
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium">
-              Total Tasks
-            </CardTitle>
+            <CardTitle className="text-sm font-medium">Total Tasks</CardTitle>
             <svg
               xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 24 24"
@@ -27,9 +31,7 @@ export default function Dashboard() {
           </CardHeader>
           <CardContent>
             <div className="text-2xl font-bold">15</div>
-            <p className="text-xs text-muted-foreground">
-              +2 since last week
-            </p>
+            <p className="text-xs text-muted-foreground">+2 since last week</p>
           </CardContent>
         </Card>
         <Card>
@@ -54,14 +56,14 @@ export default function Dashboard() {
           </CardHeader>
           <CardContent>
             <div className="text-2xl font-bold">8</div>
-            <p className="text-xs text-muted-foreground">
-              +1 since yesterday
-            </p>
+            <p className="text-xs text-muted-foreground">+1 since yesterday</p>
           </CardContent>
         </Card>
         <Card>
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium">Upcoming Events</CardTitle>
+            <CardTitle className="text-sm font-medium">
+              Upcoming Events
+            </CardTitle>
             <svg
               xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 24 24"
@@ -85,9 +87,7 @@ export default function Dashboard() {
         </Card>
         <Card>
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium">
-              AI Queries
-            </CardTitle>
+            <CardTitle className="text-sm font-medium">AI Queries</CardTitle>
             <svg
               xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 24 24"
@@ -103,9 +103,7 @@ export default function Dashboard() {
           </CardHeader>
           <CardContent>
             <div className="text-2xl font-bold">12</div>
-            <p className="text-xs text-muted-foreground">
-              +3 since last week
-            </p>
+            <p className="text-xs text-muted-foreground">+3 since last week</p>
           </CardContent>
         </Card>
       </div>
@@ -121,9 +119,7 @@ export default function Dashboard() {
         <Card className="col-span-3">
           <CardHeader>
             <CardTitle>Recent Todos</CardTitle>
-            <CardDescription>
-              You have 3 incomplete todos
-            </CardDescription>
+            <CardDescription>You have 3 incomplete todos</CardDescription>
           </CardHeader>
           <CardContent>
             <RecentTodos />
@@ -131,6 +127,5 @@ export default function Dashboard() {
         </Card>
       </div>
     </div>
-  )
+  );
 }
-

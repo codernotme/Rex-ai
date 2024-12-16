@@ -15,9 +15,11 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.urls import path
-from .views import TodoAPIView, GeminiAPIView
+from .views import TodoAPIView, GeminiAPIView, LoginView, SignupView
 
 urlpatterns = [
     path('todos/', TodoAPIView.as_view(), name='todo_api'),
     path('gemini/', GeminiAPIView.as_view(), name='gemini_api'),
+    path('login/', LoginView.as_view(), name='login'),
+    path('signup/', SignupView.as_view(), name='signup'),
 ]
