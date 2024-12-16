@@ -1,8 +1,0 @@
-django
-djangorestframework
-django-cors-headers
-python-dotenv
-google-generativeai
-pillow  # For handling images
-djangorestframework-simplejwt  # For JWT tokens (optional)
-django-cors-headers
