@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import {
@@ -12,12 +12,13 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { Label } from "@/components/ui/label";
-import { AtSign, Lock, Loader2 } from "lucide-react";
-import { SidebarProvider } from '@/components/sidebar-provider';
-import { Sidebar } from '@/components/Sidebar';
-import { Navbar } from '@/components/navbar';
+import { AtSign, Lock, Eye, EyeOff, Loader2 } from "lucide-react";
 
-async function handleAuthAction(url: string, formData: FormData) {
+async function handleAuthAction(
+  url: string,
+  formData: FormData,
+  rememberMe: boolean
+) {
   const username = formData.get("username") as string;
   const email = formData.get("email") as string;
   const password = formData.get("password") as string;
@@ -38,7 +39,11 @@ async function handleAuthAction(url: string, formData: FormData) {
 
     const data = await response.json();
     if (data.token) {
-      localStorage.setItem("token", data.token);
+      if (rememberMe) {
+        localStorage.setItem("token", data.token);
+      } else {
+        sessionStorage.setItem("token", data.token);
+      }
     }
 
     return { success: true, message: data.message };
@@ -50,11 +55,27 @@ async function handleAuthAction(url: string, formData: FormData) {
   }
 }
 
-export default function AuthPage() {
+export default function AuthPage({
+  onLoginSuccess,
+}: {
+  onLoginSuccess: () => void;
+}) {
   const [isLogin, setIsLogin] = useState(true);
   const [isPending, setIsPending] = useState(false);
   const [message, setMessage] = useState<string | null>(null);
   const [isSuccess, setIsSuccess] = useState<boolean | null>(null);
+  const [rememberMe, setRememberMe] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
+
+  useEffect(() => {
+    if (
+      typeof window !== "undefined" &&
+      (localStorage.getItem("token") !== null ||
+        sessionStorage.getItem("token") !== null)
+    ) {
+      onLoginSuccess();
+    }
+  }, [onLoginSuccess]);
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -63,33 +84,19 @@ export default function AuthPage() {
 
     const formData = new FormData(e.currentTarget);
     const actionUrl = isLogin ? "/login/" : "/signup/";
-    const result = await handleAuthAction(actionUrl, formData);
+    const result = await handleAuthAction(actionUrl, formData, rememberMe);
 
     setIsPending(false);
     setMessage(result.message);
     setIsSuccess(result.success);
+
+    if (result.success) {
+      onLoginSuccess();
+    }
   };
 
-  const isAuthenticated = typeof window !== 'undefined' && localStorage.getItem('token') !== null;
-
-  if (isAuthenticated) {
-    return (
-      <SidebarProvider>
-        <div className="flex h-screen overflow-hidden">
-          <Sidebar />
-          <div className="flex flex-col flex-1 overflow-hidden">
-            <Navbar />
-            <main className="flex-1 overflow-auto p-6">
-              {/* Render children or main content here */}
-            </main>
-          </div>
-        </div>
-      </SidebarProvider>
-    );
-  }
-
   return (
-    <div className="flex items-center justify-center min-h-screen bg-gradient-to-br from-purple-500 to-pink-500 p-4">
+    <div className="flex items-center justify-center min-h-screen p-4">
       <Card className="w-full max-w-md backdrop-blur-sm bg-white/10 shadow-xl border-0">
         <CardHeader>
           <CardTitle className="text-2xl font-bold text-white">
@@ -162,18 +169,37 @@ export default function AuthPage() {
                 <Input
                   id="password"
                   name="password"
-                  type="password"
+                  type={showPassword ? "text" : "password"}
                   placeholder="Enter your password"
                   required
                   className="pl-10 bg-white/20 border-gray-500 text-white placeholder-gray-400 focus:ring-2 focus:ring-purple-500 focus:border-transparent transition"
                 />
+                <button
+                  type="button"
+                  className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400"
+                  onClick={() => setShowPassword(!showPassword)}
+                >
+                  {showPassword ? <EyeOff size={18} /> : <Eye size={18} />}
+                </button>
               </div>
+            </div>
+            <div className="flex items-center space-x-2">
+              <Input
+                type="checkbox"
+                id="rememberMe"
+                checked={rememberMe}
+                onChange={() => setRememberMe(!rememberMe)}
+                className="text-purple-500 focus:ring-purple-500"
+              />
+              <Label htmlFor="rememberMe" className="text-gray-200">
+                Remember Me
+              </Label>
             </div>
           </CardContent>
           <CardFooter className="flex flex-col space-y-4">
             <Button
               type="submit"
-              className="w-full bg-purple-600 hover:bg-purple-700 text-white font-semibold py-2 px-4 rounded-lg transition-all duration-300 ease-in-out transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-opacity-50"
+              className="w-full bg-purple-600 hover:bg-purple-700 text-white font-semibold py-2 px-4 rounded-lg "
               disabled={isPending}
             >
               {isPending ? (

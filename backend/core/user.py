@@ -18,11 +18,6 @@ class UserDetailsView(APIView):
             "name": user.username,
             "email": user.email,
             "profileImage": user.profile.profile_image.url if user.profile.profile_image else None,
-            "stats": {
-                "posts": 10,  # Placeholder for actual stats
-                "comments": 50,
-                "likes": 200
-            }
         }
         return Response(user_data, status=status.HTTP_200_OK)
 
@@ -42,10 +37,5 @@ class UserDetailsView(APIView):
             "name": user.username,
             "email": user.email,
             "profileImage": user.profile.profile_image.url if user.profile.profile_image else None,
-            "stats": {
-                "posts": 10,
-                "comments": 50,
-                "likes": 200
-            }
         }
         return Response(updated_data, status=status.HTTP_200_OK)

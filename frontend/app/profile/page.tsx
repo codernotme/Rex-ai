@@ -1,13 +1,15 @@
 "use client";
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import { Input } from "@/components/ui/input";
+import { Button } from "@/components/ui/button";
+import Image from "next/image";
 
 const Profile = () => {
   const [userData, setUserData] = useState({
     name: "",
     email: "",
     profileImage: null as string | null,
-    stats: { posts: 0, comments: 0, likes: 0 },
   });
   const [newProfileImage, setNewProfileImage] = useState<File | null>(null);
   const [isEditing, setIsEditing] = useState(false);
@@ -17,7 +19,7 @@ const Profile = () => {
   useEffect(() => {
     // Fetch user data
     axios
-      .get("http://127.0.0.1:8000/api/user/", {
+      .get("http://127.0.0.1:8000/user/", {
         headers: { Authorization: `Bearer ${localStorage.getItem("access")}` },
       })
       .then((res) => setUserData(res.data))
@@ -42,7 +44,7 @@ const Profile = () => {
     }
 
     try {
-      const res = await axios.put("http://127.0.0.1:8000/api/user/", formData, {
+      const res = await axios.put("http://127.0.0.1:8000/user/", formData, {
         headers: {
           Authorization: `Bearer ${localStorage.getItem("access")}`,
           "Content-Type": "multipart/form-data",
@@ -70,7 +72,7 @@ const Profile = () => {
 
       <div className="flex flex-col gap-4">
         {userData.profileImage && (
-          <img
+          <Image
             src={userData.profileImage}
             alt="Profile"
             className="w-32 h-32 rounded-full object-cover"
@@ -80,7 +82,7 @@ const Profile = () => {
         <div>
           <label className="block font-medium">Name:</label>
           {isEditing ? (
-            <input
+            <Input
               type="text"
               value={userData.name}
               onChange={(e) =>
@@ -98,46 +100,37 @@ const Profile = () => {
           <p>{userData.email}</p>
         </div>
 
-        <div>
-          <label className="block font-medium">Stats:</label>
-          <ul>
-            <li>Posts: {userData.stats.posts}</li>
-            <li>Comments: {userData.stats.comments}</li>
-            <li>Likes: {userData.stats.likes}</li>
-          </ul>
-        </div>
-
         {isEditing && (
           <div>
             <label className="block font-medium">Profile Image:</label>
-            <input type="file" onChange={handleImageChange} />
+            <Input type="file" onChange={handleImageChange} />
           </div>
         )}
 
         <div className="flex gap-4 mt-4">
           {isEditing ? (
             <>
-              <button
+              <Button
                 onClick={handleSave}
                 className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600"
                 disabled={loading}
               >
                 {loading ? "Saving..." : "Save"}
-              </button>
-              <button
+              </Button>
+              <Button
                 onClick={() => setIsEditing(false)}
                 className="bg-gray-300 text-black px-4 py-2 rounded hover:bg-gray-400"
               >
                 Cancel
-              </button>
+              </Button>
             </>
           ) : (
-            <button
+            <Button
               onClick={() => setIsEditing(true)}
               className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600"
             >
               Edit Profile
-            </button>
+            </Button>
           )}
         </div>
       </div>

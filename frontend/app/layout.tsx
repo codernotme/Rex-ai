@@ -1,4 +1,5 @@
 "use client";
+import { useEffect, useState } from "react";
 import "./globals.css";
 //import type { Metadata } from "next";
 import { Inter } from "next/font/google";
@@ -20,8 +21,17 @@ export default function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
-  const isAuthenticated =
-    typeof window !== "undefined" && localStorage.getItem("token") !== null;
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      setIsAuthenticated(localStorage.getItem("token") !== null);
+    }
+  }, []);
+
+  const handleLoginSuccess = () => {
+    setIsAuthenticated(true);
+  };
 
   return (
     <html lang="en">
@@ -43,7 +53,7 @@ export default function RootLayout({
               </div>
             </SidebarProvider>
           ) : (
-            <AuthPage />
+            <AuthPage onLoginSuccess={handleLoginSuccess} />
           )}
         </ThemeProvider>
       </body>
