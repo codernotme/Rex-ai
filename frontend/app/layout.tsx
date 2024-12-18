@@ -9,6 +9,10 @@ import { SidebarProvider } from "@/components/sidebar-provider";
 import { Sidebar } from "@/components/Sidebar";
 import AuthPage from "./auth/page";
 
+interface AuthPageProps {
+  onLoginSuccess: () => void;
+}
+
 const inter = Inter({ subsets: ["latin"] });
 
 // export const metadata: Metadata = {
@@ -53,7 +57,7 @@ export default function RootLayout({
               </div>
             </SidebarProvider>
           ) : (
-            <AuthPage onLoginSuccess={handleLoginSuccess} />
+            <AuthPage onLoginSuccess={handleLoginSuccess as AuthPageProps["onLoginSuccess"]} />
           )}
         </ThemeProvider>
       </body>

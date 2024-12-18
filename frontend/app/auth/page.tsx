@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import { useRouter } from "next/router";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import {
@@ -55,11 +56,12 @@ async function handleAuthAction(
   }
 }
 
-export default function AuthPage({
-  onLoginSuccess,
-}: {
+interface AuthPageProps {
   onLoginSuccess: () => void;
-}) {
+}
+
+export default function AuthPage({ onLoginSuccess }: AuthPageProps) {
+  const router = useRouter();
   const [isLogin, setIsLogin] = useState(true);
   const [isPending, setIsPending] = useState(false);
   const [message, setMessage] = useState<string | null>(null);
@@ -73,9 +75,9 @@ export default function AuthPage({
       (localStorage.getItem("token") !== null ||
         sessionStorage.getItem("token") !== null)
     ) {
-      onLoginSuccess();
+      router.push("/");
     }
-  }, [onLoginSuccess]);
+  }, [router]);
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -92,6 +94,7 @@ export default function AuthPage({
 
     if (result.success) {
       onLoginSuccess();
+      router.push("/");
     }
   };
 
